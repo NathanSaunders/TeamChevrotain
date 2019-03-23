@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+/* Users */
 var userSchema = new Schema({
   name: {
       type: String
@@ -13,7 +14,41 @@ var userSchema = new Schema({
   },
 })
 
+var User = mongoose.model('User', userSchema);
 
+
+userSchema.methods.getOwnedDocuments = function (callback){
+  var userid = this._id;
+  Document.find({author: userid}).populate('author').populate('collaborators')
+  .exec(function(err,documents){
+      console.log('documents owned by user are are ', documents);
+    callback(err,documents);
+  })
+}
+
+userSchema.methods.getCollaboratedDocuments = function (callback){
+  var userid = this._id;
+  Document.find({author: {$nin: [userid]}, collaborators: {$all: [userid]}}).populate('author').populate('collaborators')
+  .exec(function(err,documents){
+      console.log('documents only collaborate are ', documents);
+    callback(err,documents);
+  })
+}
+
+userSchema.methods.getAllDocuments = function (callback){
+  var userid = this._id;
+  Document.find({collaborators: {$all: [userid]}}).populate('collaborators').populate('author')
+  .exec(function(err,documents){
+      console.log('documents are ', documents);
+    callback(err,documents);
+  })
+}
+
+
+
+
+
+/* Documents */
 var documentSchema = new Schema({
     title: {
         type: String,
@@ -38,35 +73,10 @@ var documentSchema = new Schema({
 
 var Document = mongoose.model('Document', documentSchema);
 
-userSchema.methods.getOwnedDocuments = function (callback){
-  var userid = this._id;
-  Document.find({author: userid}).populate('author').populate('collaborators')
-  .exec(function(err,documents){
-      console.log('documents owned by user are are ', documents);
-    callback(err,documents);
-  })
-}
-userSchema.methods.getCollaboratedDocuments = function (callback){
-    var userid = this._id;
-    
-    Document.find({author: {$nin: [userid]}, collaborators: {$all: [userid]}}).populate('author').populate('collaborators')
-    .exec(function(err,documents){
-        console.log('documents only collaborate are ', documents);
-      callback(err,documents);
-    })
-  }
+/* added */
+// documentSchema.methods.postNewDocument = function (callback) {
+// }
 
-userSchema.methods.getAllDocuments = function (callback){
-  var userid = this._id;
-  Document.find({collaborators: {$all: [userid]}}).populate('collaborators').populate('author')
-  .exec(function(err,documents){
-      console.log('documents are ', documents);
-    callback(err,documents);
-  })
-}
-
-
-var User = mongoose.model('User', userSchema);
 module.exports = {
   User: User,
   Document: Document
