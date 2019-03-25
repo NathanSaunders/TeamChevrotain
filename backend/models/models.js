@@ -19,7 +19,7 @@ var User = mongoose.model('User', userSchema);
 
 userSchema.methods.getOwnedDocuments = function (callback){
   var userid = this._id;
-  Document.find({author: userid}).populate('author').populate('collaborators')
+  Documents.find({author: userid}).populate('author').populate('collaborators')
   .exec(function(err,documents){
       console.log('documents owned by user are are ', documents);
     callback(err,documents);
@@ -28,7 +28,7 @@ userSchema.methods.getOwnedDocuments = function (callback){
 
 userSchema.methods.getCollaboratedDocuments = function (callback){
   var userid = this._id;
-  Document.find({author: {$nin: [userid]}, collaborators: {$all: [userid]}}).populate('author').populate('collaborators')
+  Documents.find({author: {$nin: [userid]}, collaborators: {$all: [userid]}}).populate('author').populate('collaborators')
   .exec(function(err,documents){
       console.log('documents only collaborate are ', documents);
     callback(err,documents);
@@ -37,7 +37,7 @@ userSchema.methods.getCollaboratedDocuments = function (callback){
 
 userSchema.methods.getAllDocuments = function (callback){
   var userid = this._id;
-  Document.find({collaborators: {$all: [userid]}}).populate('collaborators').populate('author')
+  Documents.find({collaborators: {$all: [userid]}}).populate('collaborators').populate('author')
   .exec(function(err,documents){
       console.log('documents are ', documents);
     callback(err,documents);
@@ -50,28 +50,28 @@ userSchema.methods.getAllDocuments = function (callback){
 
 /* Documents */
 var documentSchema = new Schema({
-    title: {
-        type: String,
-        default: 'Untitled Document'
-    },
-  author: {
-     type: mongoose.Schema.Types.ObjectId,
-     ref: 'User'
-  },
-  collaborators: [{
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
-  }],
+    // title: {
+    //     type: String,
+    //     default: 'Untitled Document'
+    // },
+  // author: {
+  //    type: mongoose.Schema.Types.ObjectId,
+  //    ref: 'User'
+  // },
+  // collaborators: [{
+  //       type: mongoose.Schema.ObjectId,
+  //       ref: 'User'
+  // }],
   content: String,
-  shareLink: String,
-  password: {
-         type: String,
-  },
-  dateCreated: String,
-  contentHistory: []
+  // shareLink: String,
+  // password: {
+  //        type: String,
+  // },
+  // dateCreated: String,
+  // contentHistory: []
 })
 
-var Document = mongoose.model('Document', documentSchema);
+var Documents = mongoose.model('Documents', documentSchema);
 
 /* added */
 // documentSchema.methods.postNewDocument = function (callback) {
@@ -79,5 +79,5 @@ var Document = mongoose.model('Document', documentSchema);
 
 module.exports = {
   User: User,
-  Document: Document
+  Documents: Documents
  };
