@@ -4,20 +4,27 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 
+// Requiring the `Document` model for accessing the `documents` collection
+const Documents = require('../backend/models/Documents');
+// Requiring the `User` model for accessing the `users` collection
+const User = require('../backend/models/User');
+
+
 const API_PORT = 8080;
 const app = express();
 app.use(cors());
 const router = express.Router();
 
+// this is our MongoDB database
+const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
+
 // connects our back end code with the database
-mongoose.connect('mongodb://localhost/snapDocsdb', {
-    useNewUrlParser: true
-});
+mongoose.connect(
+  dbRoute,
+  { useNewUrlParser: true }
+);
 
 let db = mongoose.connection;
-
-// Requiring the `Document` model for accessing the `documents` collection
-var Documents = require("../backend/models/models.js");
 
 // checks if connection with the database is successful
 db.once('open', function () {
@@ -56,18 +63,11 @@ router.get("/getData", (req, res) => {
 // this is our create methid
 // this method adds new data in our database
 router.post("/putData", (req, res) => {
-    let data = new Data();
-
-    const {id, content} = req.body;
-
-    if ((!id && id !== 0) || !content) {
-        return res.json({
-            success: false,
-            error: "INVALID INPUTS"
-        });
-    }
+    let data = new Documents();
+    const {title, content} = req.body;
+    
+    data.title = title;
     data.content = content;
-    data.id = id;
     data.save(err => {
         if (err) return res.json({
             success: false,
@@ -78,6 +78,17 @@ router.post("/putData", (req, res) => {
         });
     });
 });
+
+
+/* new */
+router.put("/updateData", (req, res) => {
+    const {title, content} = req.body
+
+    data.title = title
+    data.content = content
+
+    Documents.update({'title': title}, {$set:{'content': content}})
+})
 
 
 app.listen(API_PORT, function () {

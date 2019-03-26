@@ -10,9 +10,10 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      title: '', 
       text: ''
     }
-    this.handleSave = this.handleSave.bind(this)
+    this.handleNewDocTitle = this.handleNewDocTitle.bind(this)
   }
 
   componentDidMount() {
@@ -22,24 +23,37 @@ class App extends React.Component {
   getDataFromDb = () => {
     fetch("/api/getData")
       // .then(data => data.json())
-      // .then(res => this.setState({ data: res.data }));
+      // .then(res => this.setState({ data: res.data }))
       .then(res => res.text())          // convert to plain text
       .then(text => console.log(text))  // then log it out
   }
-  
 
+  
   // is called by ./components/quill/editor makeSave function
   // receives quill editor data as 'data'
-  handleSave(data) {
+  handleNewDocTitle(title) {
     this.setState( {
+      title: title,
+      // text: data
+    }, () => {
+      // our put method that uses our backend api
+      axios.post("http://localhost:8080/api/putData", {
+        title: this.state.title,
+        // content: this.states.text
+      });
+    });
+  }
+
+  handleUpdate(title, data) {
+    this.setState( {
+      title: title,
       text: data
     }, () => {
       console.log(`This.state.text: ${this.state.text}`);
-
       // our put method that uses our backend api
-      axios.post("http://localhost:8080/api/putData", {
-        id: data.id,
-        content: this.state.text
+      axios.post("http://localhost:8080/api/updateData", {
+        title: this.state.title,
+        content: this.states.text
       });
     });
   }
@@ -49,13 +63,10 @@ class App extends React.Component {
       <Router>
         <div>
           <Route path='/' exact component={Login} />
-
-          {/* added route path for editor component */}
           <Route 
             path='/editor' 
-            render={(props) => <Editor {...props} handleSave={this.handleSave} />}
+            render={(props) => <Editor {...props} handleNewDocTitle={this.handleNewDocTitle} />}
           />
-
         </div>
       </Router>
     )
@@ -64,5 +75,5 @@ class App extends React.Component {
 
 export default App;
 
-
+ 
 
