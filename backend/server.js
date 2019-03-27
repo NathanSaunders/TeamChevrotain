@@ -3,11 +3,16 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const passport = require('passport')
 
-const API_PORT = 8080;
+// pulls data from passport setup
+require('./config/passport')
+
+const API_PORT = process.env.API_PORT || 8080;
 const app = express();
 app.use(cors());
 const router = express.Router();
+
 
 // connects our back end code with the database
 mongoose.connect('mongodb://localhost/snapDocsdb', {
@@ -33,6 +38,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+app.use(passport.initialize())
 
 // append /api for our http requests
 app.use("/api", router);
