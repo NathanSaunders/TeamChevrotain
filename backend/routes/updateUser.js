@@ -1,4 +1,4 @@
-// don't know what to use here in place of sequelize
+import User from '../models/models'
 import passport from "passport";
 
 module.exports = app => {

@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
+
 
 /* Users */
-var userSchema = new Schema({
+const userSchema = new Schema({
   username: {
       type: String
   },
@@ -14,8 +15,9 @@ var userSchema = new Schema({
   },
 })
 
-var User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
+export default User
 
 // userSchema.methods.getOwnedDocuments = function (callback){
 //   var userid = this._id;
@@ -43,8 +45,3 @@ var User = mongoose.model('User', userSchema);
 //     callback(err,documents);
 //   })
 // }
-
-
-module.exports = {
-  User: User
- };

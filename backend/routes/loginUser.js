@@ -1,4 +1,4 @@
-// don't know what to use for mongoose in place of sequelize here;
+import User from '../models/models'
 import jwtSecret from '../config/jwtConfig';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';

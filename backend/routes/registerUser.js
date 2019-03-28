@@ -1,4 +1,4 @@
-// didn't add sequelize code because i wasn't sure what the mongoose equivalent was
+import User from '../models/models'
 import passport from 'passport';
 
 module.exports = app => {
