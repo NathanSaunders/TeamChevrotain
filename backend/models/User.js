@@ -1,8 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+/* Lidet */
+/* added this reference to Documents Schema */
+const Documents = require('./Documents');
 
 /* Users */
-var userSchema = new Schema({
+var UserSchema = new Schema({
   name: {
       type: String
   },
@@ -14,10 +17,9 @@ var userSchema = new Schema({
   },
 })
 
-var User = mongoose.model('User', userSchema);
-
-
-userSchema.methods.getOwnedDocuments = function (callback){
+/* Lidet */
+/* changed all references of 'userSchema' to 'UserSchema' */
+UserSchema.methods.getOwnedDocuments = function (callback){
   var userid = this._id;
   Documents.find({author: userid}).populate('author').populate('collaborators')
   .exec(function(err,documents){
@@ -26,7 +28,8 @@ userSchema.methods.getOwnedDocuments = function (callback){
   })
 }
 
-userSchema.methods.getCollaboratedDocuments = function (callback){
+
+UserSchema.methods.getCollaboratedDocuments = function (callback){
   var userid = this._id;
   Document.find({author: {$nin: [userid]}, collaborators: {$all: [userid]}}).populate('author').populate('collaborators')
   .exec(function(err,documents){
@@ -35,7 +38,8 @@ userSchema.methods.getCollaboratedDocuments = function (callback){
   })
 }
 
-userSchema.methods.getAllDocuments = function (callback){
+
+UserSchema.methods.getAllDocuments = function (callback){
   var userid = this._id;
   Document.find({collaborators: {$all: [userid]}}).populate('collaborators').populate('author')
   .exec(function(err,documents){
@@ -45,6 +49,4 @@ userSchema.methods.getAllDocuments = function (callback){
 }
 
 
-module.exports = {
-  User: User
- };
+module.exports = mongoose.model("User", UserSchema);
