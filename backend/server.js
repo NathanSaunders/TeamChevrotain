@@ -20,8 +20,9 @@ const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net
 
 // connects our back end code with the database
 mongoose.connect(
-  dbRoute,
-  { useNewUrlParser: true }
+    dbRoute, {
+        useNewUrlParser: true
+    }
 );
 
 let db = mongoose.connection;
@@ -60,35 +61,42 @@ router.get("/getData", (req, res) => {
     });
 });
 
+
 // this is our create methid
 // this method adds new data in our database
 router.post("/putData", (req, res) => {
     let data = new Documents();
-    const {title, content} = req.body;
-    
+    const {
+        title,
+        content
+    } = req.body;
+
     data.title = title;
     data.content = content;
-    data.save(err => {
+    data.save((err, responseObject) => {
+        let document_id = responseObject._id;
         if (err) return res.json({
             success: false,
             error: err
         });
         return res.json({
-            success: true
+            success: true,
+            // gets data id of new document and sends to App.js in response object
+            _id: document_id
         });
-    });
+    })
 });
 
 
-/* new */
-router.put("/updateData", (req, res) => {
-    const {title, content} = req.body
-
-    data.title = title
-    data.content = content
-
-    Documents.update({'title': title}, {$set:{'content': content}})
-})
+// this is our update method
+// this method overwrites existing data in our database
+router.post("/updateData", (req, res) => {
+  const { _id, content } = req.body;
+  Documents.findOneAndUpdate({_id: _id}, {$set:{content: content}}, {new: true}, (err, doc)=> {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
 
 
 app.listen(API_PORT, function () {

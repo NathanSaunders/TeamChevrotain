@@ -11,27 +11,35 @@ class App extends React.Component {
     super(props)
     this.state = {
       title: '', 
-      text: ''
+      text: '',
+      editorActive: false,
+      doc_id: ''
     }
-    this.handleNewDocTitle = this.handleNewDocTitle.bind(this)
+    this.handleNewDocTitleParent = this.handleNewDocTitleParent.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
 
   componentDidMount() {
     this.getDataFromDb();
   }
 
+
   getDataFromDb = () => {
     fetch("/api/getData")
       // .then(data => data.json())
       // .then(res => this.setState({ data: res.data }))
       .then(res => res.text())          // convert to plain text
-      .then(text => console.log(text))  // then log it out
+      // .then(text => console.log(text)) 
+      .then(function(text) {
+          let returnedData= JSON.parse(text);
+          console.log(returnedData)
+      });// then log it out
   }
 
   
   // is called by ./components/quill/editor makeSave function
   // receives quill editor data as 'data'
-  handleNewDocTitle(title) {
+  handleNewDocTitleParent(title) {
     this.setState( {
       title: title,
       // text: data
@@ -40,20 +48,29 @@ class App extends React.Component {
       axios.post("http://localhost:8080/api/putData", {
         title: this.state.title,
         // content: this.states.text
+      }).then(response => {
+        /* here */
+        /* now i have the id of the newly-created document */
+        /* need to pass this id as a param to editor somehow so that */
+        /* it can render editor as a non-generic component */
+        this.setState({ doc_id: response.data._id })
       });
     });
   }
 
-  handleUpdate(title, data) {
+
+/* here */
+  handleUpdate(doc_id, data) {
     this.setState( {
-      title: title,
+      doc_id: doc_id,
       text: data
     }, () => {
       console.log(`This.state.text: ${this.state.text}`);
+      console.log(`This.state.doc_id: ${this.state.doc_id}`);
       // our put method that uses our backend api
       axios.post("http://localhost:8080/api/updateData", {
-        title: this.state.title,
-        content: this.states.text
+        _id: this.state.doc_id,
+        content: this.state.text
       });
     });
   }
@@ -65,7 +82,9 @@ class App extends React.Component {
           <Route path='/' exact component={Login} />
           <Route 
             path='/editor' 
-            render={(props) => <Editor {...props} handleNewDocTitle={this.handleNewDocTitle} />}
+            render={(props) => <Editor {...props} handleNewDocTitleParent={this.handleNewDocTitleParent}
+                  handleUpdate={this.handleUpdate}
+                  doc_id={this.state.doc_id}/>}
           />
         </div>
       </Router>

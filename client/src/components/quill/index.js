@@ -9,64 +9,77 @@ class Editor extends React.Component {
       text: '', 
       newTitle: '',
       myKey: '',
+      editorActive: false,
+      doc_id: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleChangeTitle = this.handleChangeTitle.bind(this)
-    this.handleSubmitTitle = this.handleSubmitTitle.bind(this)
+    this.handleNewDocTitle = this.handleNewDocTitle.bind(this)
+    this.handleDocUpdate = this.handleDocUpdate.bind(this)
   }
-
+  // updadates state of text when keys are pressed within editor text input field
   handleChange(value) {
     this.setState({ text: value })
   }
 
-  // gets called when button is clicked to save document
-  // simply grabs text value of form and
-  // passes it to parent (app) as data
-
-
-  /* here */
-  /* getting this error when trying to post update to editor */
-  /* × TypeError: Cannot read property 'state' of undefined */
-  /* need to get the newTitle from state to pass this as a parma to handleUpdate in App.js */
-  handleUpdate() {
-    let title = this.state.newTitle;
-    let data = this.state.text;
-    this.props.handleUpdate(title, data);
-  }
-
-  // this updates the state of title from the input field
+  // updates the state of title when keys are pressed in the title input field
   handleChangeTitle(event) {
-    console.log(event.currentTarget.value);
     this.setState({ newTitle: event.currentTarget.value })
   }
-
+  
 
   // handles new title form submit
-  handleSubmitTitle(event) {
-      alert(this.state.newTitle)
+  handleNewDocTitle(event) {
       event.preventDefault()
+      alert(this.state.newTitle)
       let title = this.state.newTitle;
-      this.props.handleNewDocTitle(title);
+      this.setState({ editorActive: true} );
+      this.props.handleNewDocTitleParent(title);
   }
 
-/* --------------------------------------here--------------------------------------  */
-/* get handlUpdate to recognize what the form title is when saving (updating) editor */
-/* then we need to change the axios.post call in app to be 'update', for saving documents */
+
+ // gets called when button is clicked to save document
+  // simply grabs text value of form and
+  // passes it to parent (app) as data
+  handleDocUpdate() {
+    let doc_id = this.props.doc_id;
+    // let title = this.state.newTitle;
+    let data = this.state.text;
+    this.props.handleUpdate(doc_id, data); 
+    // console.log(`Doc ID from editor ${doc_id}`);
+  }
 
   render() {
+    let editorActive = this.state.editorActive;
+
     return (
       <React.Fragment>
-          <ReactQuill   value={this.state.text}
-                        onChange={this.handleChange}></ReactQuill>
+          {/* title input component */}
+          {!editorActive ? (
+            <form onSubmit={this.handleNewDocTitle}>
+              <input type="text" 
+                    value={this.state.meyKey}
+                    onChange={this.handleChangeTitle}  />
+              <input type="submit" value="Submit" />
+            </form>
+            ) : (
+              null
+            )}
+
+          {/* document editor component*/}
+          {editorActive ? (
+            <ReactQuill   value={this.state.text}
+                          onChange={this.handleChange}
+                          doc_id={this.props.doc_id}></ReactQuill>
+          ) : (
+            null
+          )}
+          
+          {/* update document button component */}
           <Button       variant="success" 
-                        onClick={this.handleUpdate}
+                        onClick={this.handleDocUpdate}
+                        doc_id={this.props.doc_id}
                         >Save Document</Button>
-          <form onSubmit={this.handleSubmitTitle}>
-            <input type="text" 
-                   value={this.state.meyKey}
-                   onChange={this.handleChangeTitle}  />
-            <input type="submit" value="Submit" />
-          </form>
       </React.Fragment>
     )
   }

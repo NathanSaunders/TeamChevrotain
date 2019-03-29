@@ -16,7 +16,10 @@ const DocumentsSchema = new Schema(
 //         type: mongoose.Schema.ObjectId,
 //         ref: 'User'
 //   }],
-  content: String,
+  content: {
+      type: String,
+      default: 'empty content'
+  },
   // shareLink: String,
   // password: {
   //        type: String,
@@ -25,9 +28,5 @@ const DocumentsSchema = new Schema(
   // contentHistory: []
 })
 
-DocumentsSchema.methods.update =  function(query, updateData, cb) { 
-    this.findOneAndUpdate(query, 
-        {$set: updateData},{new: true}, cb);
-}
 
 module.exports = mongoose.model("Documents", DocumentsSchema);

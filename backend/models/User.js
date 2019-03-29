@@ -28,6 +28,7 @@ UserSchema.methods.getOwnedDocuments = function (callback){
   })
 }
 
+
 UserSchema.methods.getCollaboratedDocuments = function (callback){
   var userid = this._id;
   Document.find({author: {$nin: [userid]}, collaborators: {$all: [userid]}}).populate('author').populate('collaborators')
@@ -36,6 +37,7 @@ UserSchema.methods.getCollaboratedDocuments = function (callback){
     callback(err,documents);
   })
 }
+
 
 UserSchema.methods.getAllDocuments = function (callback){
   var userid = this._id;
