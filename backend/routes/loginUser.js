@@ -1,7 +1,7 @@
-import User from '../models/models'
-import jwtSecret from '../config/jwtConfig';
-import jwt from 'jsonwebtoken';
-import passport from 'passport';
+const User = require('../models/models')
+const jwtSecret = require('../config/jwtConfig');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 module.exports = app => {
     app.get('/loginUser', (req, res, next) => {

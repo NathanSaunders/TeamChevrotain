@@ -1,5 +1,5 @@
-import User from '../models/models'
-import passport from 'passport'
+const User = require('../models/models')
+const passport = require('passport')
 
 module.exports = (app) => {
     app.delete('/deleteUser', (req, res, next) => {

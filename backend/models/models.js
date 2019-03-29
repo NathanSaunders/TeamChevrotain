@@ -1,9 +1,8 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
 /* Users */
-const userSchema = new Schema({
+const UserSchema = new Schema({
   username: {
       type: String
   },
@@ -15,9 +14,7 @@ const userSchema = new Schema({
   },
 })
 
-const User = mongoose.model('User', userSchema);
-
-export default User
+module.exports = mongoose.model("User", UserSchema)
 
 // userSchema.methods.getOwnedDocuments = function (callback){
 //   var userid = this._id;

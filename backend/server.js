@@ -22,7 +22,8 @@ mongoose.connect('mongodb://localhost/snapDocsdb', {
 let db = mongoose.connection;
 
 // Requiring the `Document` model for accessing the `documents` collection
-var Documents = require("../backend/models/models.js");
+var Documents = require("../backend/models/Documents.js");
+var User = require('../backend/models/models.js');
 
 // checks if connection with the database is successful
 db.once('open', function () {
@@ -43,6 +44,44 @@ app.use(passport.initialize())
 // append /api for our http requests
 app.use("/api", router);
 
+require('./routes/deleteUser');
+require('./routes/findUsers');
+require('./routes/loginUser');
+// require('./routes/registerUser');
+require('./routes/updateUser');
+// require('./routes/getData');
+
+router.post('/registerUser', (req, res, next) => {
+    passport.authenticate('register', (err, user, info) => {
+        if(err) {
+            console.log('a', err)
+        }
+        if (info !== undefined) {
+            console.log('b', info.message);
+        } else {
+            req.logIn(user, err => {
+                const data = {
+                    username: req.body.name,
+                    email: req.body.email,
+                };
+                User.findOne({
+                    where: {
+                        username: data.username
+                    }
+                }).then(user => {
+                    user.update({
+                        username: data.username,
+                        email: data.email
+                    }).then(() => {
+                        console.log('user created in db');
+                        res.status(200).send({ message: 'user created'})
+                    })
+                })
+            })
+        }
+    })(req, res, next);
+})
+
 
 // this is our get method
 // this method fetches all available data in our database
@@ -59,7 +98,7 @@ router.get("/getData", (req, res) => {
     });
 });
 
-// this is our create methid
+// this is our create method
 // this method adds new data in our database
 router.post("/putData", (req, res) => {
     let data = new Data();

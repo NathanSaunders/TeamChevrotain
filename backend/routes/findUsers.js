@@ -1,8 +1,8 @@
-import passport from 'passport';
+const passport = require('passport');
 
 module.exports = app => {
     app.get('/findUser', (req, res, next) => {
-        passport.authenticate('jwt' { session: false }, (err, user, info) => {
+        passport.authenticate('jwt', { session: false }, (err, user, info) => {
             if (err) {
                 console.log(err);
             }

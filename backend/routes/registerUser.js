@@ -1,8 +1,8 @@
-import User from '../models/models'
-import passport from 'passport';
+const User = require('../models/models')
+const passport = require('passport');
 
-module.exports = app => {
-    app.post('/registerUser', (req, res, next) => {
+module.exports = router => {
+    router.post('/registerUser', (req, res, next) => {
         passport.authenticate('register', (err, user, info) => {
             if(err) {
                 console.log(err)
