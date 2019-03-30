@@ -1,16 +1,25 @@
 {
-    "name": "teamchevrotain",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\""
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "concurrently": "^4.0.1",
-        "nodemon": "^1.18.4"
-    }
+  "name": "teamchevrotain",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadamsin3d/TeamChevrotain.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jadamsin3d/TeamChevrotain/issues"
+  },
+  "homepage": "https://github.com/jadamsin3d/TeamChevrotain#readme"
 }

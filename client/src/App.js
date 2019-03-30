@@ -90,7 +90,7 @@ class App extends React.Component {
               : data.map(data => (
                   <li style={{ padding: "10px" }} key={data.title}>
                     <span style={{ color: "gray" }}> Title: </span> {data.title} <br />
-                    <span style={{ color: "gray" }}> data: </span> {data.content}
+                    {/* <span style={{ color: "gray" }}> data: </span> {data.content} */}
                   </li>
                 ))}
           </ul>

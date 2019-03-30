@@ -10,7 +10,7 @@ const Documents = require('../backend/models/Documents');
 const User = require('../backend/models/User');
 
 
-const API_PORT = 8080;
+const API_PORT = process.env.API_PORT || 8080;
 const app = express();
 app.use(cors());
 const router = express.Router();
