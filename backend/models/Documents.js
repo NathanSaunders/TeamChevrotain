@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 // this will be our data base's Documenets data structure 
 const DocumentsSchema = new Schema(
     {
-    id: Number,
     title: {
         type: String,
         default: 'Untitled Document'
@@ -17,7 +16,10 @@ const DocumentsSchema = new Schema(
 //         type: mongoose.Schema.ObjectId,
 //         ref: 'User'
 //   }],
-  content: String,
+  content: {
+      type: String,
+      default: 'empty content'
+  },
   // shareLink: String,
   // password: {
   //        type: String,
@@ -26,5 +28,5 @@ const DocumentsSchema = new Schema(
   // contentHistory: []
 })
 
-// var Documents = mongoose.model('Documents', documentSchema);
+
 module.exports = mongoose.model("Documents", DocumentsSchema);

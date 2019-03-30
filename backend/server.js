@@ -6,18 +6,27 @@ const logger = require('morgan');
 const passport = require('passport')
 
 
-// ==========================================================
-
-
 const API_PORT = process.env.API_PORT || 8080;
+
+// Requiring the `Document` model for accessing the `documents` collection
+const Documents = require('../backend/models/Documents');
+// Requiring the `User` model for accessing the `users` collection
+const User = require('../backend/models/User');
+
 const app = express();
 app.use(cors());
 const router = express.Router();
 
+// this is our MongoDB database
+const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
+
 // connects our back end code with the database
-mongoose.connect('mongodb://localhost/snapDocsdb', {
-    useNewUrlParser: true
-});
+mongoose.connect(
+    dbRoute, {
+        useNewUrlParser: true
+    }
+);
+
 
 // checks if connection with the database is successful
 let db = mongoose.connection;
@@ -69,27 +78,37 @@ router.get("/getData", (req, res) => {
 // this is our create method
 // this method adds new data in our database
 router.post("/putData", (req, res) => {
-    let data = new Data();
+    let data = new Documents();
+    const {
+        title,
+        content
+    } = req.body;
 
-    const {id, content} = req.body;
-
-    if ((!id && id !== 0) || !content) {
-        return res.json({
-            success: false,
-            error: "INVALID INPUTS"
-        });
-    }
+    data.title = title;
     data.content = content;
-    data.id = id;
-    data.save(err => {
+    data.save((err, responseObject) => {
+        let document_id = responseObject._id;
         if (err) return res.json({
             success: false,
             error: err
         });
         return res.json({
-            success: true
+            success: true,
+            // gets data id of new document and sends to App.js in response object
+            _id: document_id
         });
-    });
+    })
+});
+
+
+// this is our update method
+// this method overwrites existing data in our database
+router.post("/updateData", (req, res) => {
+  const { _id, content } = req.body;
+  Documents.findOneAndUpdate({_id: _id}, {$set:{content: content}}, {new: true}, (err, doc)=> {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
 });
 
 
