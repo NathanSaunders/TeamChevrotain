@@ -18,7 +18,7 @@ const router = express.Router();
 // this is our MongoDB database
 // const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
 
-const dbRoute = "mongodb://auth_user:Levelup_19@ds121238.mlab.com:21238/heroku_f2clz9bv"
+const dbRoute = "mongodb+srv://auth_user:Levelup_19@ds121238.mlab.com:21238/heroku_f2clz9bv"
 
 // connects our back end code with the database
 mongoose.connect(
