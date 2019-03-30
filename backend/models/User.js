@@ -1,51 +1,38 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-/* Lidet */
-/* added this reference to Documents Schema */
-const Documents = require('./Documents');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
 
-/* Users */
-var UserSchema = new Schema({
-  name: {
-      type: String
-  },
-  password: {
+const UserSchema = new Schema({
+    email: {
         type: String,
-  },
-  email: {
-       type: String,
-  },
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    // username: {
+    //     type: String,
+    //     required: true
+    // }
+});
+
+UserSchema.pre('save', async function(next) {
+    const user = this;
+    // Hash the password with a salt round of 10, the more secure it is but slower the app becomes
+    const hash = await bcrypt.hash(this.password, 10);
+    
+    // Replaces the plain text password with the hash and store it. 
+    this.password = hash
+    next();
 })
 
-/* Lidet */
-/* changed all references of 'userSchema' to 'UserSchema' */
-UserSchema.methods.getOwnedDocuments = function (callback){
-  var userid = this._id;
-  Documents.find({author: userid}).populate('author').populate('collaborators')
-  .exec(function(err,documents){
-      console.log('documents owned by user are are ', documents);
-    callback(err,documents);
-  })
-}
-
-
-UserSchema.methods.getCollaboratedDocuments = function (callback){
-  var userid = this._id;
-  Document.find({author: {$nin: [userid]}, collaborators: {$all: [userid]}}).populate('author').populate('collaborators')
-  .exec(function(err,documents){
-      console.log('documents only collaborate are ', documents);
-    callback(err,documents);
-  })
-}
-
-
-UserSchema.methods.getAllDocuments = function (callback){
-  var userid = this._id;
-  Document.find({collaborators: {$all: [userid]}}).populate('collaborators').populate('author')
-  .exec(function(err,documents){
-      console.log('documents are ', documents);
-    callback(err,documents);
-  })
+UserSchema.methods.isValidPassword = async function(password) {
+    const user = this;
+    // Hashes the password sent by the user for login and checks if the hashed password store in the database matches the one sent. Returns true if it does
+    const compare = await bcrypt.compare(password, user.password);
+    return compare;
 }
 
 
