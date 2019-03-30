@@ -3,14 +3,16 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const passport = require('passport')
+
+
+const API_PORT = process.env.API_PORT || 8080;
 
 // Requiring the `Document` model for accessing the `documents` collection
 const Documents = require('../backend/models/Documents');
 // Requiring the `User` model for accessing the `users` collection
 const User = require('../backend/models/User');
 
-
-const API_PORT = 8080;
 const app = express();
 app.use(cors());
 const router = express.Router();
@@ -25,15 +27,19 @@ mongoose.connect(
     }
 );
 
-let db = mongoose.connection;
 
 // checks if connection with the database is successful
+let db = mongoose.connection;
 db.once('open', function () {
     console.log("Connected to Mongo Database");
 })
 
+mongoose.Promise = global.Promise;
+
 // checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+require('./auth/auth');
 
 // bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({
@@ -41,10 +47,18 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+app.use(passport.initialize())
+
+// Requiring the `Document` model for accessing the `documents` collection
+
+const Documents = require("../backend/models/Documents.js");
+const routes = require('./routes/routes')
+const secureroute = require('./routes/secureroutes');
 
 // append /api for our http requests
 app.use("/api", router);
-
+app.use("/", routes);
+app.use('/user', passport.authenticate('jwt', {section: false}), secureroute)
 
 // this is our get method
 // this method fetches all available data in our database
@@ -61,8 +75,7 @@ router.get("/getData", (req, res) => {
     });
 });
 
-
-// this is our create methid
+// this is our create method
 // this method adds new data in our database
 router.post("/putData", (req, res) => {
     let data = new Documents();
