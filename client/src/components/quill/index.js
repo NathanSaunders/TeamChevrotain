@@ -65,7 +65,7 @@ class Editor extends React.Component {
             ) : (
               null
             )}
-
+            
           {/* document editor component*/}
           {editorActive ? (
             <ReactQuill   value={this.state.text}
@@ -74,7 +74,6 @@ class Editor extends React.Component {
           ) : (
             null
           )}
-          
           {/* update document button component */}
           <Button       variant="success" 
                         onClick={this.handleDocUpdate}
