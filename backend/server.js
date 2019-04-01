@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const passport = require('passport')
 
-
 const API_PORT = process.env.API_PORT || 8080;
 
 // Requiring the `Document` model for accessing the `documents` collection
@@ -26,7 +25,6 @@ mongoose.connect(
         useNewUrlParser: true
     }
 );
-
 
 // checks if connection with the database is successful
 let db = mongoose.connection;
@@ -50,8 +48,6 @@ app.use(logger("dev"));
 app.use(passport.initialize())
 
 // Requiring the `Document` model for accessing the `documents` collection
-
-const Documents = require("../backend/models/Documents.js");
 const routes = require('./routes/routes')
 const secureroute = require('./routes/secureroutes');
 
