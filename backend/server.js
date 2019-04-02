@@ -22,17 +22,8 @@ if (process.env.NODE_EN == "production") {
     app.use(express.static("client/build"));
 }
 
-// // this is our MongoDB database
-// const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
 
-// // connects our back end code with the database
-// mongoose.connect(
-//     dbRoute, {
-//         useNewUrlParser: true
-//     }
-// );
-
-/* new */
+// this is our MongoDB database
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true")
 
 // checks if connection with the database is successful
@@ -40,7 +31,6 @@ let db = mongoose.connection;
 db.once('open', function () {
     console.log("Connected to Mongo Database");
 })
-
 
 mongoose.Promise = global.Promise;
 
