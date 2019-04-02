@@ -45,7 +45,8 @@ class App extends React.Component {
       // text: data
     }, () => {
       // our put method that uses our backend api
-      axios.post("http://localhost:8080/api/putData", {
+      // axios.post("https://localhost:8080/api/putData", {
+        axios.post("/putData", {
         title: this.state.title,
         // content: this.states.text
       }).then(response => {
@@ -68,7 +69,8 @@ class App extends React.Component {
       console.log(`This.state.text: ${this.state.text}`);
       console.log(`This.state.doc_id: ${this.state.doc_id}`);
       // our put method that uses our backend api
-      axios.post("http://localhost:8080/api/updateData", {
+      // axios.post("http://localhost:8080/api/updateData", {
+        axios.post("/updateData", {
         _id: this.state.doc_id,
         content: this.state.text
       });
