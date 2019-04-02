@@ -22,10 +22,8 @@ if (process.env.NODE_EN == "production") {
     app.use(express.static("client/build"));
 }
 
-
 // this is our MongoDB database
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true")
-
 
 // checks if connection with the database is successful
 let db = mongoose.connection;
@@ -65,11 +63,6 @@ router.get("/getData", (req, res) => {
             success: false,
             error: err
         });
-        /* new */
-        else {
-            (response) => response.json();
-        }
-        /* end new */
         return res.json({
             success: true,
             data: data
