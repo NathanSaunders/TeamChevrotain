@@ -80,6 +80,7 @@ class App extends React.Component {
 
     return(
       <Router>
+        <React.Fragment>
         {/* this renders our list of all docs in the db */}
         {/* and their content */}
         <div>
@@ -95,7 +96,6 @@ class App extends React.Component {
           </ul>
         </div>
         <div>
-          <React.Fragment>
             <Route path='/' exact component={Login} />
             <Route 
               path='/editor' 
@@ -103,8 +103,8 @@ class App extends React.Component {
                     handleUpdate={this.handleUpdate}
                     doc_id={this.state.doc_id}/>}
             />
-          </React.Fragment>
         </div>
+        </React.Fragment>
       </Router>
     )
   }
