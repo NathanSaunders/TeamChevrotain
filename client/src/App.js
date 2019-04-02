@@ -24,7 +24,6 @@ class App extends React.Component {
     this.getDataFromDb();
   }
 
-
   getDataFromDb = () => {
     fetch("/api/getData")
       .then(data => data.json())
