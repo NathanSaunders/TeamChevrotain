@@ -28,13 +28,7 @@ class App extends React.Component {
   getDataFromDb = () => {
     fetch("/api/getData")
       .then(data => data.json())
-      .then(res => this.setState({ data: res.data }))
-      // .then(res => res.text())          // convert to plain text
-      // // .then(text => console.log(text)) 
-      // .then(function(text) {
-      //     let returnedData= JSON.parse(text);
-      //     console.log(returnedData)
-      // });// then log it out
+      .then(res => this.setState({ data: res.data }));
   }
 
   
@@ -90,7 +84,7 @@ class App extends React.Component {
               : data.map(data => (
                   <li style={{ padding: "10px" }} key={data.title}>
                     <span style={{ color: "gray" }}> Title: </span> {data.title} <br />
-                    {/* <span style={{ color: "gray" }}> data: </span> {data.content} */}
+                    <span style={{ color: "gray" }}> data: </span> {data.content}
                   </li>
                 ))}
           </ul>
