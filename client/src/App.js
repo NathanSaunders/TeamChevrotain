@@ -95,13 +95,15 @@ class App extends React.Component {
           </ul>
         </div>
         <div>
-          <Route path='/' exact component={Login} />
-          <Route 
-            path='/editor' 
-            render={(props) => <Editor {...props} handleNewDocTitleParent={this.handleNewDocTitleParent}
-                  handleUpdate={this.handleUpdate}
-                  doc_id={this.state.doc_id}/>}
-          />
+          <React.Fragment>
+            <Route path='/' exact component={Login} />
+            <Route 
+              path='/editor' 
+              render={(props) => <Editor {...props} handleNewDocTitleParent={this.handleNewDocTitleParent}
+                    handleUpdate={this.handleUpdate}
+                    doc_id={this.state.doc_id}/>}
+            />
+          </React.Fragment>
         </div>
       </Router>
     )
