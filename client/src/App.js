@@ -24,11 +24,16 @@ class App extends React.Component {
     this.getDataFromDb();
   }
 
-
   getDataFromDb = () => {
     fetch("/api/getData")
       .then(data => data.json())
-      .then(res => this.setState({ data: res.data }));
+      .then(res => this.setState({ data: res.data }))
+      // .then(res => res.text())          // convert to plain text
+      // // .then(text => console.log(text)) 
+      // .then(function(text) {
+      //     let returnedData= JSON.parse(text);
+      //     console.log(returnedData)
+      // });// then log it out
   }
 
   
