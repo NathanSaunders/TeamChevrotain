@@ -19,7 +19,7 @@ function LoginForm(props) {
 							</div>
 							<div className="form-group">
 								<input
-									type="text"
+									type="password"
 									name="password"
 									value={props.value}
 									onChange={props.onChangePassword}
