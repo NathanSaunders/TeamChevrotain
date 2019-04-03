@@ -96,7 +96,6 @@ router.post("/putData", (req, res) => {
     })
 });
 
-
 // exmaple
 // this is our update method
 // this method overwrites existing data in our database
@@ -107,7 +106,6 @@ router.post("/updateData", (req, res) => {
     return res.json({ success: true });
   });
 });
-
 
 app.listen(API_PORT, function () {
     console.log("Server is running on Port: " + API_PORT);
