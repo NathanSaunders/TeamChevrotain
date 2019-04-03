@@ -20,15 +20,18 @@ class Login extends Component {
       .post(`${apiBaseURL}login?email=${payload.email}&password=${payload.password}`)
       .catch(err => console.log('failed!', err))
 			.then((response) => {
-				console.log(response);
 				if (response.status === 200) {
-          console.log('Login successfull');
-          
+          console.log('Login successful');
+          console.log(response)
+          console.log(response.data.token);
+          localStorage.setItem("token", JSON.stringify(response.data.token))
+          localStorage.setItem("email", JSON.stringify(payload.email))
+          // to retrieve, write const retrievedToken = localStorage.getItem('token');
+          // to retrieve, write const retrievedEmail = localStorage.getItem('email');
 				} else if (response.status === 204) {
 					console.log("Username and password don't match");
 				} else {
 					console.log('Username does not exist');
-					alert('Username does not exist');
 				}
 			})
 			.catch((err) => {
