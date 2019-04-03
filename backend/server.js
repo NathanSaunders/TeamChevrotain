@@ -23,7 +23,7 @@ if (process.env.NODE_EN == "production") {
 }
 
 // this is our MongoDB database
-mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true")
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://Super_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true")
 
 // checks if connection with the database is successful
 let db = mongoose.connection;
