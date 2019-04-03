@@ -28,12 +28,6 @@ class App extends React.Component {
     fetch("/api/getData")
       .then(data => data.json())
       .then(res => this.setState({ data: res.data }))
-      // .then(res => res.text())          // convert to plain text
-      // // .then(text => console.log(text)) 
-      // .then(function(text) {
-      //     let returnedData= JSON.parse(text);
-      //     console.log(returnedData)
-      // });// then log it out
   }
 
   
@@ -45,8 +39,7 @@ class App extends React.Component {
       // text: data
     }, () => {
       // our put method that uses our backend api
-      // axios.post("https://localhost:8080/api/putData", {
-        axios.post("/putData", {
+      axios.post("http://localhost:8080/api/putData", {
         title: this.state.title,
         // content: this.states.text
       }).then(response => {
@@ -69,8 +62,7 @@ class App extends React.Component {
       console.log(`This.state.text: ${this.state.text}`);
       console.log(`This.state.doc_id: ${this.state.doc_id}`);
       // our put method that uses our backend api
-      // axios.post("http://localhost:8080/api/updateData", {
-        axios.post("/updateData", {
+      axios.post("http://localhost:8080/api/updateData", {
         _id: this.state.doc_id,
         content: this.state.text
       });
@@ -82,7 +74,6 @@ class App extends React.Component {
 
     return(
       <Router>
-        <React.Fragment>
         {/* this renders our list of all docs in the db */}
         {/* and their content */}
         <div>
@@ -98,15 +89,14 @@ class App extends React.Component {
           </ul>
         </div>
         <div>
-            <Route path='/' exact component={Login} />
-            <Route 
-              path='/editor' 
-              render={(props) => <Editor {...props} handleNewDocTitleParent={this.handleNewDocTitleParent}
-                    handleUpdate={this.handleUpdate}
-                    doc_id={this.state.doc_id}/>}
-            />
+          <Route path='/' exact component={Login} />
+          <Route 
+            path='/editor' 
+            render={(props) => <Editor {...props} handleNewDocTitleParent={this.handleNewDocTitleParent}
+                  handleUpdate={this.handleUpdate}
+                  doc_id={this.state.doc_id}/>}
+          />
         </div>
-        </React.Fragment>
       </Router>
     )
   }

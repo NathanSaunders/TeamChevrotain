@@ -4,20 +4,22 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const passport = require('passport')
+const router = express.Router();
 
+/* new, changed ports from APi_PORT to just PORT */
 const PORT = process.env.PORT || 8080;
 
 // Requiring the `Document` model for accessing the `documents` collection
-const Documents = require('../backend/models/Documents');
+const Documents = require('./backend/models/Documents');
 // Requiring the `User` model for accessing the `users` collection
-const User = require('../backend/models/User');
+const User = require('./backend/models/User');
 
 const app = express();
 app.use(cors());
-const router = express.Router();
 
 /* new */
 if (process.env.NODE_EN == "production") {
+    //set static folder
     app.use(express.static("client/build"));
 }
 
@@ -35,7 +37,7 @@ mongoose.Promise = global.Promise;
 // checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-require('./auth/auth');
+require('./backend/auth/auth');
 
 // bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({
@@ -46,8 +48,8 @@ app.use(logger("dev"));
 app.use(passport.initialize())
 
 // Requiring the `Document` model for accessing the `documents` collection
-const routes = require('./routes/routes')
-const secureroute = require('./routes/secureroutes');
+const routes = require('./backend/routes/routes')
+const secureroute = require('./backend/routes/secureroutes');
 
 // append /api for our http requests
 app.use("/api", router);
@@ -68,6 +70,7 @@ router.get("/getData", (req, res) => {
         });
     });
 });
+
 
 // this is our create method
 // this method adds new data in our database
@@ -104,6 +107,10 @@ router.post("/updateData", (req, res) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
+});
+
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 
