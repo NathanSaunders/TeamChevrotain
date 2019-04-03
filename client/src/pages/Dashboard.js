@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DashboardHeader from 'DashboardHeader';
-import DashboardBody from 'DashboardBody';
+import DashboardHeader from '../components/Dashboard/DashboardHeader';
+import DashboardBody from '../components/Dashboard/DashboardBody';
 
 class Dashboard extends Component {
 	state = {};
@@ -9,8 +9,8 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<div>
-				<DashboardHeader />
-				<DashboardBody />
+				<DashboardHeader {...this.state} />
+				<DashboardBody {...this.state}/>
 			</div>
 		);
 	}

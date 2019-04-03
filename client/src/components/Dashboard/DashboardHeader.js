@@ -1,10 +1,11 @@
 import React from 'react';
 
 function DashboardHeader(props) {
+
 	return (
 		<div className="container">
 			<nav className="navbar navbar-light bg-light">
-				<a className="navbar-brand" href="#">
+				<a className="navbar-brand" href="/dashboard">
 					SnapDocs
 				</a>
 			</nav>
