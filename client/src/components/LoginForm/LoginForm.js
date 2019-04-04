@@ -3,7 +3,7 @@ import "./loginForm.css"
 function LoginForm(props) {
 	return (
 		<div class="root-container">
-			<h1 class="header">Log-in to Chevrotain</h1>
+			<h1 class="header">Log-in to SnapDoc</h1>
 			<div className="container">
 				<div className="row">
 					<div className="col-md-12">
@@ -28,7 +28,9 @@ function LoginForm(props) {
 							</div>
 							<div className="form-group">
 								<input type="submit" value="Log-In" className="btn btn-primary" />
+
 							</div>
+							
 						</form>
 					</div>
 				</div>
