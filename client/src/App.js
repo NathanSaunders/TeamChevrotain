@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
 import "./App.css";
 import Editor from "./components/quill";
 import axios from "axios";
@@ -116,6 +117,7 @@ class App extends React.Component {
             )}
           />
           <Route path="/dashboard" exact component={Dashboard} />
+          <Route path ="/register" exact component={Register} />
         </div>
       </Router>
     );

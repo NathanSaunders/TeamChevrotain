@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router";
+import { BrowserRouter as Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm/LoginForm";
 import axios from "axios";
+
 
 class Login extends Component {
   state = {
@@ -66,6 +67,9 @@ class Login extends Component {
           onChangePassword={this.onChangePassword}
           onSubmit={this.onSubmit}
         />
+        <Link to="/register" className="linkToRegister">
+          Register
+        </Link>
       </div>
     );
   }
