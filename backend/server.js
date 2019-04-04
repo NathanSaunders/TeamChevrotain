@@ -110,3 +110,68 @@ router.post("/updateData", (req, res) => {
 app.listen(API_PORT, function () {
     console.log("Server is running on Port: " + API_PORT);
 })
+// // ==================added Lidetu===================
+// io.on('connection', (socket) => {
+//     // console.log('a user connected'); 
+//     //listen for joined events when users enter
+//     socket.on('joined', ({doc, user}) => {
+  
+//         socket.join(doc) //give join the string name of the room, this joins that room
+//         console.log(io.nsps['/'].adapter.rooms[doc].length);
+//         if(io.nsps['/'].adapter.rooms[doc].length >= 6) {
+//           socket.emit('redirect');
+//           return;
+//         }
+  
+//         console.log('user has joined a room', doc);
+//         socket.emit('welcome', {doc}) //emit back to the sending user
+//         //create a new key on the socket object with information you want to be accessible in all the handlers
+//         socket.documentRoom = doc; 
+  
+//         online.push(user);
+//         online[online.length - 1].color = colors[online.length - 1];
+//         online = _.uniq(online, '_id');
+  
+//         io.to(doc).emit('onlineUpdated', {online});
+//         //broadcast a userjoined event to everyone but sender that is in the room named doc
+//         socket.broadcast.to(doc).emit('userjoined');
+  
+//     })
+  
+//   socket.on('newContent', stringifiedContent => {
+//       socket.broadcast.to(socket.documentRoom).emit('receivedNewContent', stringifiedContent)
+//   })
+  
+//   socket.on('newContentHistory', contentHistory => {
+//     console.log("In socket");
+//     io.to(socket.documentRoom).emit('receivedNewContentHistory', contentHistory);
+//   })
+  
+//   socket.on('cursorMove', selection => {
+//       socket.broadcast.to(socket.documentRoom).emit('receiveNewCursor', selection)
+//   })
+  
+//     socket.on('disconnect', ({userleft}) => {
+//       if(!userleft) {
+//         return;
+//       }
+//       console.log('user disconnected');
+//       var index = 0;
+//       for(var i = 0; i < online.length; i++) {
+//         if(online[i] === userleft._id) {
+//           index = i;
+//           break;
+//         }
+//       }
+//       online.splice(index, 1);
+//       //leave the room, get the doc from the key we stored on the socket
+//       socket.leave(socket.documentRoom) 
+//       io.to(doc).emit('onlineUpdated', {online});
+//       socket.broadcast.to(socket.documentRoom).emit('userleft') //emit to all other users in room that user has left
+//     });
+  
+//     socket.on('limit', () => {
+//       window.location.href = '/';
+//     });
+  
+//   });

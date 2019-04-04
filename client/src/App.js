@@ -86,21 +86,29 @@ class App extends React.Component {
     const { data } = this.state;
 
     return (
-      <Router>
-        {/* this renders our list of all docs in the db */}
-        {/* and their content */}
+      <Router>        
         <div>
+            <Route path="/" exact component={Login} />
+            <Route path="/editor"  render={props => (<Editor {...props}
+                  handleNewDocTitleParent={this.handleNewDocTitleParent}
+                  handleUpdate={this.handleUpdate}
+                  doc_id={this.state.doc_id}
+                  />)}  />
+             <Route path="/dashboard" exact component={Dashboard} />
+        </div>
+
+                {/* this renders our list of all docs in the db */}
+                {/* and their content */}
+        {/* <div>
           <ul>
-            {data.length <= 0
-              ? "NO DB ENTRIES YET"
-              : data.map(data => (
-                  <li style={{ padding: "10px" }} key={data.title}>
-                    <span style={{ color: "gray" }}> Title: </span> {data.title}{" "}
+            {data.length <= 0? "NO DB ENTRIES YET": data.map(data => (
+                <li style={{ padding: "10px" }} key={data.title}>
+                   <span style={{ color: "gray" }}> Title: </span> {data.title}{" "}
                     <br />
-                    <span style={{ color: "gray" }}> data: </span>{" "}
+                   <span style={{ color: "gray" }}> data: </span>{" "}
                     {data.content}
                   </li>
-                ))}
+               ))}
           </ul>
         </div>
         <div>
