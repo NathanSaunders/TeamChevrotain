@@ -87,7 +87,7 @@ class App extends React.Component {
 
     return (
       <Router>        
-        <div>
+        {/* <div>
             <Route path="/" exact component={Login} />
             <Route path="/editor"  render={props => (<Editor {...props}
                   handleNewDocTitleParent={this.handleNewDocTitleParent}
@@ -95,11 +95,11 @@ class App extends React.Component {
                   doc_id={this.state.doc_id}
                   />)}  />
              <Route path="/dashboard" exact component={Dashboard} />
-        </div>
+        </div> */}
 
                 {/* this renders our list of all docs in the db */}
                 {/* and their content */}
-        {/* <div>
+         {/* <div>
           <ul>
             {data.length <= 0? "NO DB ENTRIES YET": data.map(data => (
                 <li style={{ padding: "10px" }} key={data.title}>
@@ -110,7 +110,7 @@ class App extends React.Component {
                   </li>
                ))}
           </ul>
-        </div>
+        </div> */}
         <div>
           <Route path="/" exact component={Login} />
           <Route

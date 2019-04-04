@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
+import {	 Link } from "react-router-dom";
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import axios from 'axios';
 
@@ -54,9 +54,6 @@ class Register extends Component {
 
 		return (
 			<div>
-        <div>
-        {signedup ? <p>you're registered, return to the log-in page to get coding!</p> : <p>sign up to access SnapDocs!</p>}
-        </div>
 				<RegisterForm
 					{...this.state}
 					onChangeEmail={this.onChangeEmail}
@@ -64,7 +61,10 @@ class Register extends Component {
           onSubmit={this.onSubmit}
           Registered={this.Registered}
 				/>
-        <Link to="/Login" className="signInLinkDiv">
+				<div>
+        {signedup ? <p>you're registered, return to the log-in page to get coding!</p> : <p>sign up to access SnapDocs!</p>}
+        </div>
+        <Link to="/login" className="signInLinkDiv">
 					Sign-In
 				</Link>
 			</div>
