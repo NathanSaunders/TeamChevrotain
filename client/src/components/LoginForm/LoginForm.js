@@ -1,9 +1,9 @@
 import React from 'react';
-
+import "./loginForm.css"
 function LoginForm(props) {
 	return (
-		<div>
-			<h1>Log-in to Chevrotain</h1>
+		<div class="root-container">
+			<h1 class="header">Log-in to Chevrotain</h1>
 			<div className="container">
 				<div className="row">
 					<div className="col-md-12">
