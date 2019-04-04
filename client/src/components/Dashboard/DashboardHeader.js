@@ -82,6 +82,9 @@ class DashboardHeader extends React.Component {
           <p className="save-status">{ saveStatusRender() }</p>
           <div onClick={this.handleSave} className="save-button">
             Save
+          </div>  
+          <div  className="logout-button">
+            Log Out
           </div>        
         </div>
 
