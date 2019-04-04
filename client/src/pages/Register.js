@@ -3,6 +3,7 @@ import {	 Link } from "react-router-dom";
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import axios from 'axios';
 
+
 class Register extends Component {
 	state = {
 		email: '',
@@ -15,7 +16,6 @@ class Register extends Component {
       registered: true
     })
   }
-
 
 	onSubmit = (e) => {
 		e.preventDefault();
@@ -64,7 +64,7 @@ class Register extends Component {
 				<div>
         {signedup ? <p>you're registered, return to the log-in page to get coding!</p> : <p>sign up to access SnapDocs!</p>}
         </div>
-        <Link to="/login" className="signInLinkDiv">
+        <Link to="/" className="signInLinkDiv">
 					Sign-In
 				</Link>
 			</div>

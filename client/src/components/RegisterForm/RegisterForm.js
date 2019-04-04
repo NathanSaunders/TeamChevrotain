@@ -1,14 +1,16 @@
 import React from 'react';
+import "./registerForm.css"
 
 function RegisterForm(props) {
 	return (
-		<div>
-			<h1>Register to Access SnapDocs</h1>
-			<div className="container registerForm">
+		<div  class="root-container ">
+			<h1 class="header">Register to Access SnapDocs</h1>
+			<div className="container registerForm box-container">
 				<div className="row">
 					<div className="col-md-12">
 						<form onSubmit={props.onSubmit}>
 							<div className="form-group">
+							<label >Email:</label>
 								<input
                                     id="email"
 									type="text"
@@ -19,6 +21,7 @@ function RegisterForm(props) {
 								/>
 							</div>
 							<div className="form-group">
+							<label >password:</label>
 								<input
                                     id="password"
 									type="password"

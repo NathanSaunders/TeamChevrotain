@@ -2,13 +2,14 @@ import React from 'react';
 import "./loginForm.css"
 function LoginForm(props) {
 	return (
-		<div class="root-container">
+		<div class="root-container ">
 			<h1 class="header">Log-in to SnapDoc</h1>
-			<div className="container">
+			<div className="container box-container controller">
 				<div className="row">
 					<div className="col-md-12">
 						<form onSubmit={props.onSubmit}>
 							<div className="form-group">
+							<label >Email:</label>
 								<input
 									type="text"
 									name="email"
@@ -18,6 +19,7 @@ function LoginForm(props) {
 								/>
 							</div>
 							<div className="form-group">
+							<label >Password:</label>
 								<input
 									type="password"
 									name="password"
