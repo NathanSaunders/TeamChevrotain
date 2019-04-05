@@ -4,15 +4,22 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const passport = require('passport')
+const path=require("path");
+
 
 const API_PORT = process.env.API_PORT || 8080;
 
 // Requiring the `Document` model for accessing the `documents` collection
-const Documents = require('../backend/models/Documents');
+const Documents = require('/backend/models/Documents');
 // Requiring the `User` model for accessing the `users` collection
-const User = require('../backend/models/User');
+const User = require('/backend/models/User');
+
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname, 'client','build','index.html'))
+    })
+
   }
 
 const app = express();
