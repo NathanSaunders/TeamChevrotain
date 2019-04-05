@@ -9,10 +9,8 @@ html, body {
     width:105%;
     background-color:black;
     height:80px;
-    margin-top:20px;
     margin-left:-10px;
     margin-bottom:30px;
-
 }
 
 .snap-logo{
@@ -56,3 +54,40 @@ html, body {
     cursor: pointer;
     background-color:rgb(96, 96, 255);
 }
+
+.find-db-docs {
+    top: 27px;
+    left: 15%;
+    display: inline-block;
+    position: absolute;
+    color: white;
+}
+
+.docs {
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.docs-list {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.docs-list ul {
+    list-style: none;
+    padding: 10px;
+    color: grey;
+}
+
+.docs-list ul li{
+    padding-bottom: 10px;
+}
+
+.link-to-doc {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+

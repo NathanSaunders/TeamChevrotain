@@ -38,7 +38,7 @@ class Editor extends React.Component {
   }
 
 
- // gets called when button is clicked to save document
+  // gets called when button is clicked to save document
   // simply grabs text value of form and
   // passes it to parent (app) as data
   handleDocUpdate() {

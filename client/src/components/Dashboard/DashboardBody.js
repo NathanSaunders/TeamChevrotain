@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import brace from 'brace';
+// import brace from 'brace';
 import  AceEditor from 'react-ace';
 import 'brace/mode/java';
 import 'brace/theme/twilight';
@@ -14,14 +14,43 @@ require('isomorphic-fetch');
 
 // const  socket = openSocket('http://localhost:8000');
 class DashboardBody extends Component {
-  class = {};
-  
-  onChange(newValue) {
-    console.log('change',newValue);
+  constructor(props) {
+    super(props)
+    this.state = { 
+      title: '',
+      inputValue: '',
+      text: '', 
+      savedStatus: 'not saving' 
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInputValue = this.handleInputValue.bind(this);
+    this.saveNewTitle = this.saveNewTitle.bind(this);
   }
+  class = {};
+
+  // updadates state of text when keys are pressed within editor text input field
+  handleChange(value) {
+    this.setState({ text: value })
+    let data = this.state.text;
+    this.props.handleChangeParent(data);
+  }
+
+
+  handleInputValue(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+
+  saveNewTitle(event) {
+    event.preventDefault();
+    let newTitle = this.state.inputValue;
+    this.setState({ title: newTitle})
+    this.props.handleNewTitleParent(newTitle);
+  }
+
   componentDidMount () {
   document.getElementById("collaborate").style.display = "block";
-   
     // const script = document.createElement("script");
     // script.src = "togetherjs-min.js";
     // //script.async = true;
@@ -32,19 +61,22 @@ class DashboardBody extends Component {
     // // button.addEventListener ("click", function() {
     // //   this.script.TogetherJS(this); return false
     // // });
-
-}
+  }
   
+
   render() {
-  const retrievedEmail = localStorage.getItem('email')
+    const retrievedEmail = localStorage.getItem('email');
 
     return (
       <div>
-      <div className="container">
-        <h6>Hello, {retrievedEmail} </h6>       
-      </div>
-        <AceEditor
-              
+        <div className="container">
+          <h6>Hello, {retrievedEmail} </h6>       
+        </div>
+        <div className='doc-title-input'>
+          <input type='text' placeholder='Enter a new title...' value={this.state.inputValue} onChange={this.handleInputValue}></input>
+          <input type='submit' value='Save your new title' onClick={this.saveNewTitle}></input>
+        </div>
+        <AceEditor  
             // var editor = brace.edit("editor")
             // brace.require('brace/ext/settings_menu').init(editor);
             // editor.setTheme("brace/theme/twilight");
@@ -66,43 +98,30 @@ class DashboardBody extends Component {
             },
             readOnly: true
           }]}
-      
-
+    
           placeholder="Placeholder Text"
           mode="javascript"
           theme="twilight"
           name="blah2"
           ext="searchbox"
-        //onLoad={tonLoad}
-          onChange={this.onChange}
+          onChange={this.handleChange}
           fontSize={14}
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
-          value={`function onLoad(editor) {
-          console.log("i've loaded");
-        }`}
+          value={this.state.text}
+          title={this.state.title}
           setOptions={{
-          enableBasicAutocompletion: false,
-          enableLiveAutocompletion: false,
-          enableSnippets: true,
-          showLineNumbers: true,
-          tabSize: 2,
+            enableBasicAutocompletion: false,
+            enableLiveAutocompletion: false,
+            enableSnippets: true,
+            showLineNumbers: true,
+            tabSize: 2,
           }}
           />
-          </div>
+      </div>
     );
   }
 }
 
 export default DashboardBody;
-
-
-
-
-
-
-
-
-
-  

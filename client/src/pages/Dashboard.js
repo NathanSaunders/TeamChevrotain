@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import axios from 'axios';
 import DashboardHeader from '../components/Dashboard/DashboardHeader';
 import DashboardBody from '../components/Dashboard/DashboardBody';
+import DashboardDocList from '../components/Dashboard/DashboardDocList';
 
 class Dashboard extends Component {
 	state = {};
@@ -9,8 +10,21 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<div>
-				<DashboardHeader {...this.state} />
-				<DashboardBody {...this.state}/>
+				<DashboardHeader 
+					enableDocsList={this.props.enableDocsList}
+					handleDashboardSave={this.props.handleDashboardSave}
+					savedStatus={this.props.savedStatus}
+				/>
+				{
+                !this.props.displayDocsList ?
+                (
+                    <DashboardBody 
+						handleChangeParent={this.props.handleChangeParent}
+						handleNewTitleParent={this.props.handleNewTitleParent}
+						/>
+                )
+                :  	<DashboardDocList />
+            	}
 			</div>
 		);
 	}

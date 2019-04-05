@@ -12,16 +12,17 @@ const  socket = openSocket('http://localhost:8000');
 class DashboardHeader extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { text: '', savedStatus: 'not saving' }
+    this.state = { 
+      text: '', 
+      savedStatus: '' 
+    }
     this.handleChange = this.handleChange.bind(this);
-    this.handleSave = this.handleSave.bind(this);
-    this.handleSaveStatus = this.handleSaveStatus.bind(this);
-
+    this.callDashboardHandleSave = this.callDashboardHandleSave.bind(this);
+    this.navigateToDocs = this.navigateToDocs.bind(this);
   }
   
   
   componentDidMount(){
-    
       fetch('/api/gettext')
         // .then(res => res.json())
         .then(data => this.setState({ text: data }));
@@ -35,58 +36,47 @@ class DashboardHeader extends React.Component {
     if (value.length !== this.state.text.length) {
         console.log("I am Emitting");
         socket.emit('toText', value);
-        status = 'Changes not saved.'
       };
       this.setState({text: value, savedStatus: status});
+      console.log(this.state.text);
   };
 
-  handleSaveStatus(status){
-    this.setState({savedStatus: status})
-    if (status === 'Saved!'){
-      setTimeout(() => {
-        this.setState({savedStatus: 'not saving'})
-      },2000)
-    }
+
+  // calls DashboardHandlSave in parent App.js
+  callDashboardHandleSave() {
+    this.props.handleDashboardSave();
   }
 
-  handleSave() {
-    this.handleSaveStatus('Loading...')
-    fetch('/api/savetext', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({text: this.state.text})
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.handleSaveStatus('Saved!')
-      })
+  // calls function to enable render of DocsList
+  navigateToDocs() {
+    this.props.enableDocsList();
   }
+
   render() {
-    let { savedStatus } = this.state;
+    let savedStatus = this.props.savedStatus;
+
     let saveStatusRender = () => {
-      if (savedStatus === 'not saving'){
+      if (savedStatus === ''){
         return '';
       } else {
         return savedStatus;
       }
     }
+    
     return (
       <div>
         <div className="top-nav">
           <div className="snap-logo">
             <img src={snapLogo} alt='snap Logo' />
           </div>
+          <div className="find-db-docs">
+            <p className='docs' onClick={this.navigateToDocs}>Get Documents</p>
+          </div>
           <p className="save-status">{ saveStatusRender() }</p>
-          <div onClick={this.handleSave} className="save-button">
+          <div onClick={this.callDashboardHandleSave} className="save-button">
             Save
           </div>        
-        </div>
-
-        {/* <ReactQuill placeholder={'Start writing here... '} value={this.state.text} onChange={this.handleChange} /> */}
-     
+        </div>     
       </div>
     );
   }
