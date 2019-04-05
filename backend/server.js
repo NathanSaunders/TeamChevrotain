@@ -72,17 +72,20 @@ router.get("/getData", (req, res) => {
 });
 
 // this method queries DB and returns on document
-router.get('/getDoc/:_id', (req, res) => {
-    console.log(`Our request ID param: ${req.params._id}`);
-    // Documents.findOne({ _id: req.params._id }, (err, post) => {
-    //     if (err) return res.json({
-    //     success: false,
-    //     error: err
-    // });
-    // return res.json({
-    //         success: true,
-    //         data: data
-    // });
+router.get('/getDoc:', (req, res) => {
+    let id = req.params._id
+    alert(`Our request ID param: ${id}`);
+
+    Documents.findOne({ _id: ObjectId(`${id}`) }, (err, post) => {
+        if (err) return res.json({
+            success: false,
+            error: err
+         });
+        return res.json({
+            success: true,
+            data: data
+        });
+    });
 });
 
 

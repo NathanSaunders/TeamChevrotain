@@ -26,12 +26,12 @@ class DashboardDocList extends React.Component {
         .then(res => this.setState({ data: res.data }))
     };
 
-    getDocFromDB = (id, e) => {
-      alert(id)
-      
+    getDocFromDB = (id, e) => { 
+      const _id = encodeURIComponent(id);
+       
       axios.get('/getDoc', {
           params: {
-            _id: id
+            _id: _id
           }
         })
         .then(function (response) {

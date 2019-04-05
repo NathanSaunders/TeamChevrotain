@@ -77,6 +77,7 @@ class App extends React.Component {
     this.setState({ displayDocsList: true});
   }
 
+
   // gets called by DashboardBody.js
   handleNewTitleParent(newTitle) {
     console.log(`New Title (inside App): ${newTitle}`);
@@ -145,6 +146,7 @@ class App extends React.Component {
                   doc_id={this.state.doc_id}
                   />)}  />
             <Route path ="/register" exact component={Register} />
+      </Router>
     );
   }
 }
