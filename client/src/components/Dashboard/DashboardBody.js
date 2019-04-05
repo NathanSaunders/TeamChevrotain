@@ -50,7 +50,11 @@ class DashboardBody extends Component {
   }
 
   componentDidMount () {
-  document.getElementById("collaborate").style.display = "block";
+    const retrievedToken = localStorage.getItem("token");
+    if(!retrievedToken == "") {
+      document.getElementById("collaborate").style.display = "block";
+      console.log('token: ' + retrievedToken)
+    }
     // const script = document.createElement("script");
     // script.src = "togetherjs-min.js";
     // //script.async = true;

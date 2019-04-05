@@ -4,8 +4,24 @@ import DashboardBody from '../components/Dashboard/DashboardBody';
 import DashboardDocList from '../components/Dashboard/DashboardDocList';
 
 class Dashboard extends Component {
-	state = {};
+	constructor() {
+		super()
+		this.state = {};
+		this.CheckToken = this.CheckToken.bind(this);
+	}
+	
+	componentDidMount() {
+		this.CheckToken()
+	}
 
+	CheckToken = () => {
+		const retrievedToken = localStorage.getItem("token");
+		console.log(retrievedToken)
+		if(retrievedToken === null) {
+			this.props.history.push("/");
+		}
+	} 
+	
 	render() {
 		return (
 			<div>
