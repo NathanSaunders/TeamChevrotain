@@ -35,7 +35,6 @@ class DashboardBody extends Component {
     this.props.handleChangeParent(data);
   }
 
-
   handleInputValue(event) {
     this.setState({
       inputValue: event.target.value

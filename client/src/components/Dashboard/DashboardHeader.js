@@ -19,8 +19,13 @@ class DashboardHeader extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.callDashboardHandleSave = this.callDashboardHandleSave.bind(this);
     this.navigateToDocs = this.navigateToDocs.bind(this);
+    this.logout = this.logout.bind(this)
   }
-  
+
+  logout = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
   
   componentDidMount(){
       fetch('/api/gettext')
@@ -40,7 +45,6 @@ class DashboardHeader extends React.Component {
       this.setState({text: value, savedStatus: status});
       console.log(this.state.text);
   };
-
 
   // calls DashboardHandlSave in parent App.js
   callDashboardHandleSave() {
@@ -76,7 +80,9 @@ class DashboardHeader extends React.Component {
           <div onClick={this.callDashboardHandleSave} className="save-button">
             Save
           </div>  
-          <a href="/"> <div  className="logout-button">Log Out </div></a>      
+          <div onClick={this.logout} className="logout-button">
+            logout
+          </div>  
           </div>     
       </div>
     );
