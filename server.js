@@ -15,7 +15,9 @@ const User = require('../backend/models/User');
 const app = express();
 app.use(cors());
 const router = express.Router();
-
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  }
 // this is our MongoDB database
 const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
 
