@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
 import "./App.css";
 // import Editor from "./components/quill";
 import axios from "axios";
@@ -130,15 +131,8 @@ class App extends React.Component {
     const { data } = this.state;
 
     return (
-      <Router>        
-        <div>
-            <Route path="/" exact component={Login} />
-            {/* <Route path="/editor"  render={props => (<Editor {...props}
-                  handleNewDocTitleParent={this.handleNewDocTitleParent}
-                  handleUpdate={this.handleUpdate}
-                  doc_id={this.state.doc_id}
-                  />)}  /> */}
-             {/* <Route path="/dashboard" exact component={Dashboard} /> */}
+      <Router>      
+             <Route path="/" exact component={Login} />  
              <Route path="/dashboard" render={props => (<Dashboard {...props}
                   savedStatus={this.state.savedStatus}
                   enableDocsList={this.enableDocsList}
@@ -150,8 +144,7 @@ class App extends React.Component {
                   handleUpdate={this.handleUpdate}
                   doc_id={this.state.doc_id}
                   />)}  />
-        </div>
-   </Router>
+            <Route path ="/register" exact component={Register} />
     );
   }
 }
