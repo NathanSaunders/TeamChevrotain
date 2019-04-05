@@ -2,8 +2,8 @@ import React from 'react';
 import "./loginForm.css"
 function LoginForm(props) {
 	return (
-		<div class="root-container ">
-			<h1 class="header">Log-in to SnapDoc</h1>
+		<div className="root-container ">
+			<h1 className="header">Log-in to SnapDoc</h1>
 			<div className="container box-container controller">
 				<div className="row">
 					<div className="col-md-12">
@@ -42,3 +42,4 @@ function LoginForm(props) {
 }
 
 export default LoginForm;
+

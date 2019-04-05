@@ -45,7 +45,7 @@
       // Also with findRoom: "roomName" it will connect to the given room name
       findRoom: null,
       // If true, starts TogetherJS automatically (of course!)
-      autoStart: true,
+      autoStart: false,
       // If true, then the "Join TogetherJS Session?" confirmation dialog
       // won't come up
       suppressJoinConfirmation: false,
@@ -61,7 +61,7 @@
       // of the page; i.e., if you one person is on `http://example.com/#view1`
       // and another person is at `http://example.com/#view2` then these two people
       // are considered to be at completely different URLs
-      includeHashInUrl: false,
+      includeHashInUrl: true,
       // When true, the WebRTC-based mic/chat will be disabled
       disableWebRTC: false,
       // When true, youTube videos will synchronize

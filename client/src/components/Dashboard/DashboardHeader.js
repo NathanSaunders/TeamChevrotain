@@ -1,12 +1,12 @@
 import React from 'react'
 import snapLogo from '../../assets/snap.png';
-import openSocket from 'socket.io-client';
+//import openSocket from 'socket.io-client';
 import './Home.css'
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 
-const  socket = openSocket('http://localhost:8000');
+// const  socket = openSocket('http://localhost:8000');
 
 
 class DashboardHeader extends React.Component {
@@ -28,19 +28,20 @@ class DashboardHeader extends React.Component {
   }
   
   componentDidMount(){
-      fetch('/api/gettext')
+      //fetch('/api/gettext')
         // .then(res => res.json())
-        .then(data => this.setState({ text: data }));
-        socket.on('subscribeToText', (text) => {
-          this.setState({text: text});
-        });
+        //.then(data => this.setState({ text: data }));
+        // socket.on('subscribeToText', (text) => {
+        //   this.setState({text: text});
+        // });
+        console.log("mounted")
     };
 
   handleChange(value) {
     let status = '';
     if (value.length !== this.state.text.length) {
         console.log("I am Emitting");
-        socket.emit('toText', value);
+       // socket.emit('toText', value);
       };
       this.setState({text: value, savedStatus: status});
       console.log(this.state.text);
@@ -80,6 +81,7 @@ class DashboardHeader extends React.Component {
           <div onClick={this.callDashboardHandleSave} className="save-button">
             Save
           </div>  
+          
           <div onClick={this.logout} className="logout-button">
             logout
           </div>  

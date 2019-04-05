@@ -71,7 +71,7 @@ class DashboardBody extends Component {
     const retrievedEmail = localStorage.getItem('email');
 
     return (
-      <div>
+      <div className="container">
         <div className="container">
           <h6>Hello, {retrievedEmail} </h6>       
         </div>
