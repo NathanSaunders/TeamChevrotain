@@ -122,10 +122,10 @@ class DashboardBody extends Component {
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
-          value={`function onLoad(editor) {
-            console.log("i've loaded");
-          }`}
-          //value={this.state.text}
+          // value={`function onLoad(editor) {
+          //   console.log("i've loaded");
+          // }`}
+          value={this.state.text}
           title={this.state.title}
           setOptions={{
             enableBasicAutocompletion: false,
