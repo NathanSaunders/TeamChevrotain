@@ -27,21 +27,21 @@ app.use(cors());
 const router = express.Router();
 
 //this is our MongoDB database
-const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
+//const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
 
 //connects our back end code with the database
-mongoose.connect(
-    dbRoute, {
-        useNewUrlParser: true
-    }
-);
 // mongoose.connect(
-//     process.env.MONGODB_URI || "mongodb://luda:passme03@ds133086.mlab.com:33086/heroku_bpjz283f",
-//     {
-//       useCreateIndex: true,
-//       useNewUrlParser: true
+//     dbRoute, {
+//         useNewUrlParser: true
 //     }
-//   );
+// );
+mongoose.connect(
+    process.env.MONGODB_URI || "mongodb://lidet:passme03@ds229771.mlab.com:29771/heroku_tzt8nsx7",
+    {
+      useCreateIndex: true,
+      useNewUrlParser: true
+    }
+  );
 
 // checks if connection with the database is successful
 let db = mongoose.connection;
