@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
-import "./App.css";
-// import Editor from "./components/quill";
+import HomePage from "./pages/homepage"
+
 import axios from "axios";
 
 class App extends React.Component {
@@ -84,56 +84,14 @@ class App extends React.Component {
     this.setState({title: newTitle});
   }
 
-  // is called by ./components/quill/editor makeSave function
-  // receives quill editor data as 'data'
-  // handleNewDocTitleParent(title) {
-  //   this.setState(
-  //     {
-  //       title: title
-  //       // text: data
-  //     },
-  //     () => {
-  //       // our put method that uses our backend api
-  //       axios
-  //         .post("http://localhost:8080/api/putData", {
-  //           title: this.state.title
-  //           // content: this.states.text
-  //         })
-  //         .then(response => {
-  //           /* here */
-  //           /* now i have the id of the newly-created document */
-  //           /* need to pass this id as a param to editor somehow so that */
-  //           /* it can render editor as a non-generic component */
-  //           this.setState({ doc_id: response.data._id });
-  //         });
-  //     }
-  //   );
-  // }
-
-  // handleUpdate(doc_id, data) {
-  //   this.setState(
-  //     {
-  //       doc_id: doc_id,
-  //       text: data
-  //     },
-  //     () => {
-  //       console.log(`This.state.text: ${this.state.text}`);
-  //       console.log(`This.state.doc_id: ${this.state.doc_id}`);
-  //       // our put method that uses our backend api
-  //       axios.post("http://localhost:8080/api/updateData", {
-  //         _id: this.state.doc_id,
-  //         content: this.state.text
-  //       });
-  //     }
-  //   );
-  // }
+  
 
   render() {
     const { data } = this.state;
 
     return (
       <Router>      
-             <Route path="/" exact component={Login} />  
+             <Route path="/" exact component={HomePage} />  
              <Route path="/dashboard" render={props => (<Dashboard {...props}
                   savedStatus={this.state.savedStatus}
                   enableDocsList={this.enableDocsList}
@@ -146,6 +104,7 @@ class App extends React.Component {
                   doc_id={this.state.doc_id}
                   />)}  />
             <Route path ="/register" exact component={Register} />
+            <Route path ="/login" exact component={Login} />
       </Router>
     );
   }

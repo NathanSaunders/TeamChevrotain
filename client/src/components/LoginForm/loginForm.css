@@ -1,9 +1,12 @@
 html,
 body,
 #root {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
+    background: url(https://png2.kisspng.com/sh/6d8372e2924098cf337fede9528d3eaf/L0KzQYm3VMAyN6FBiZH0aYP2gLBuTf1qdJx4gNN0ZT3rcbBrkBhic5Yye95ycD3kgsW0kBhic5YygNN3ZIOwRbLqUMdnOJQ1fNc6N0WxR4aAV8QxOWU2TaQ7NUa3SIi9UMU3QV91htk=/kisspng-milkshake-handshake-clip-art-shake-hands-5ac07f0c0de175.7577401415225648760569.png) #231f20 no-repeat center center fixed;
+    min-height: 300px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     
 }
 

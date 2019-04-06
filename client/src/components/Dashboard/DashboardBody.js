@@ -5,14 +5,12 @@ import 'brace/mode/java';
 import 'brace/theme/twilight';
 import 'brace/ext/settings_menu'
 import 'brace/ext/searchbox'
-// import ReactQuill from 'react-quill';
-// import snapLogo from '../assets/snap.png';
-// import openSocket from 'socket.io-client';
+
 import './Home.css'
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-// const  socket = openSocket('http://localhost:8000');
+
 class DashboardBody extends Component {
   constructor(props) {
     super(props)
@@ -27,6 +25,9 @@ class DashboardBody extends Component {
     this.saveNewTitle = this.saveNewTitle.bind(this);
   }
   class = {};
+  // onChange(newValue) {
+  //   console.log('change',newValue);
+  // }
 
   // updadates state of text when keys are pressed within editor text input field
   handleChange(value) {
@@ -73,12 +74,21 @@ class DashboardBody extends Component {
     return (
       <div className="container">
         <div className="container">
-          <h6>Hello, {retrievedEmail} </h6>       
+          {/* <h6>Hello, {retrievedEmail} </h6>        */}
         </div>
         <div className='doc-title-input'>
-          <input type='text' placeholder='Enter a new title...' value={this.state.inputValue} onChange={this.handleInputValue}></input>
-          <input type='submit' value='Save your new title' onClick={this.saveNewTitle}></input>
+          <input type='text' placeholder='Enter File Name...' value={this.state.inputValue} onChange={this.handleInputValue}></input>
+          <input type='submit' value='Save File Name' onClick={this.saveNewTitle}></input>
         </div>
+
+        <section id="be-the-first" className="pad-xs">
+              <div className="container">
+                <div className="row">
+                  <div className="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
+                    {/* <h2>Code your Masterpiece!</h2> */}
+                    <p className="lead">Work on your app idea simultaneously with colleagues!</p>
+                  </div>
+                </div>
         <AceEditor  
             // var editor = brace.edit("editor")
             // brace.require('brace/ext/settings_menu').init(editor);
@@ -112,7 +122,10 @@ class DashboardBody extends Component {
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
-          value={this.state.text}
+          value={`function onLoad(editor) {
+            console.log("i've loaded");
+          }`}
+          //value={this.state.text}
           title={this.state.title}
           setOptions={{
             enableBasicAutocompletion: false,
@@ -122,6 +135,11 @@ class DashboardBody extends Component {
             tabSize: 2,
           }}
           />
+      </div>
+    </section>
+
+
+       
       </div>
     );
   }

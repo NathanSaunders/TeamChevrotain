@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {	 Link } from "react-router-dom";
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import axios from 'axios';
+//import background from "../assets/background.png";
+
 
 
 class Register extends Component {
@@ -10,7 +12,10 @@ class Register extends Component {
     password: '',
     registered: false
   };
-  
+	
+	// componentDidMount() {
+	// 	document.body.style.backgroundImage = `url("${background}")`
+	// }
   Registered = () => {
     this.setState({
       registered: true
@@ -61,12 +66,12 @@ class Register extends Component {
           onSubmit={this.onSubmit}
           Registered={this.Registered}
 				/>
-				<div>
+				{/* <div>
         {signedup ? <p>you're registered, return to the log-in page to get coding!</p> : <p>sign up to access SnapDocs!</p>}
-        </div>
-        <Link to="/" className="signInLinkDiv">
+        </div> */}
+        {/* <Link to="/" className="signInLinkDiv">
 					Sign-In
-				</Link>
+				</Link> */}
 			</div>
 		);
 	}

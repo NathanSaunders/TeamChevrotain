@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm/LoginForm";
 import axios from "axios";
+// import background from "../assets/background.png";
 
 
 class Login extends Component {
@@ -9,6 +10,10 @@ class Login extends Component {
         email: "",
         password: ""
       };
+      componentDidMount() {
+      //   document.body.style.backgroundImage = `url("${background}")`
+      
+       }
 
   onSubmit = e => {
       e.preventDefault();
@@ -68,9 +73,9 @@ class Login extends Component {
           onChangePassword={this.onChangePassword}
           onSubmit={this.onSubmit}
         />
-        <Link to="/register" className="linkToRegister">
+        {/* <Link to="/register" className="linkToRegister">
           Register
-        </Link>
+        </Link> */}
       </div>
     );
   }

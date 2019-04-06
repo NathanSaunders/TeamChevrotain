@@ -1,18 +1,19 @@
+
 import React from 'react';
 import snapLogo from '../../assets/snap.png';
 
-
-function LoginForm(props) {
+function home() {
 	return (
       < div>
             <div className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">              
                     <div className="navbar-collapse collapse">
-                    <div className="logo">
+            <div className="logo">
             <img src={snapLogo} alt='snap Logo' />
           </div>
+
+
                     <ul className="nav navbar-nav navbar-right">
-                        <li><a href="/" >Home</a></li>
                         <li><a href="register" >Register</a></li>
                         <li><a href="login">Sign in</a></li>
                     </ul>
@@ -24,68 +25,13 @@ function LoginForm(props) {
       <div className="container">
         <div className="row">
           <div className="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
-            <h2>Login</h2>
-            {/* <p className="lead">Lorem ipsum dolor sit amet, consectetur adipis.</p> */}
+            <h2>Code your Masterpiece!</h2>
+            <p className="lead">Work on your app idea simultaneously with colleagues!</p>
           </div>
         </div>
-        <div>
-        <div className="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
-        <form onSubmit={props.onSubmit}>
-                <div className="form-group row">
-                    <label  className="col-sm-2 col-form-label white" id="inputEmail3">Email</label>
-                    <div className="col-sm-10">
-                    <input 
-                            type="email" 
-                            name="email"
-                            className="form-control" 
-                            id="inputEmail3" 
-                            value={props.value}
-                            onChange={props.onChangeEmail}
-                            placeholder="Email"
-                    />
-                    {/* <input
-									type="text"
-									name="email"
-									value={props.value}
-									onChange={props.onChangeEmail}
-									placeholder="Email"
-								/> */}
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <label  className="col-sm-2 col-form-label white">Password</label>
-                    <div className="col-sm-10">
-                    <input 
-                            type="password" 
-                            name="password"
-                            className="form-control" 
-                            id="inputPassword3"
-                            value={props.value}
-							onChange={props.onChangePassword}
-                            placeholder="Password"
-                     />
-                    {/* <input
-									type="password"
-									name="password"
-									value={props.value}
-									onChange={props.onChangePassword}
-									placeholder="Password"
-								/> */}
-                    </div>
-                </div>
-                <div className="form-group row">
-    <div className="col-sm-10">
-      {/* <button type="submit" className="btn btn-primary">Sign in</button> */}
-      <input type="submit" value="Log-In" className="btn btn-primary" />
-
-    </div>
-  </div>
-  </form>
-  </div>
-                </div>
-        {/* <div className="iphone wow fadeInUp" data-wow-delay="1s">
+        <div className="iphone wow fadeInUp" data-wow-delay="1s">
 	        <img src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/renderstart.gif?sfvrsn=3d8cfee1_1"/>
-        </div> */}
+        </div>
       </div>
     </section>
     
@@ -100,7 +46,7 @@ function LoginForm(props) {
 			    <div className="col-sm-4 wow fadeIn" data-wow-delay="0.8s">
 				    <hr  className="line blue"/>
 				    <h3>Collaborate.</h3>
-				    <p>Share blueprints and codes with friends and colleagues. You can even utilize the app to teach classNamees!</p>
+				    <p>Share blueprints and codes with friends and colleagues. You can even utilize the app to teach classes!</p>
 			    </div>
 			    <div className="col-sm-4 wow fadeIn" data-wow-delay="1.2s">
 				    <hr  className="line yellow"/>
@@ -132,4 +78,4 @@ function LoginForm(props) {
     );
 }
 
-export default LoginForm;
+export default home;

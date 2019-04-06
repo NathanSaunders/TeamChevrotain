@@ -10,38 +10,38 @@ const path=require("path");
 const API_PORT = process.env.API_PORT || 8080;
 
 // Requiring the `Document` model for accessing the `documents` collection
-const Documents = require('/backend/models/Documents');
+const Documents = require('../backend/models/Documents');
 // Requiring the `User` model for accessing the `users` collection
-const User = require('/backend/models/User');
+const User = require('../backend/models/User');
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-    app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname, 'client','build','index.html'))
-    })
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static("client/build"));
+//     app.get('*',(req,res)=>{
+//         res.sendFile(path.resolve(__dirname, 'client','build','index.html'))
+//     })
 
-  }
+//   }
 
 const app = express();
 app.use(cors());
 const router = express.Router();
 
-// this is our MongoDB database
-//const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
+//this is our MongoDB database
+const dbRoute = "mongodb+srv://auth_user:Openwater_19@cluster0-ot0uy.mongodb.net/test?retryWrites=true";
 
-// connects our back end code with the database
-// mongoose.connect(
-//     dbRoute, {
-//         useNewUrlParser: true
-//     }
-// );
+//connects our back end code with the database
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://luda:passme03@ds133086.mlab.com:33086/heroku_bpjz283f",
-    {
-      useCreateIndex: true,
-      useNewUrlParser: true
+    dbRoute, {
+        useNewUrlParser: true
     }
-  );
+);
+// mongoose.connect(
+//     process.env.MONGODB_URI || "mongodb://luda:passme03@ds133086.mlab.com:33086/heroku_bpjz283f",
+//     {
+//       useCreateIndex: true,
+//       useNewUrlParser: true
+//     }
+//   );
 
 // checks if connection with the database is successful
 let db = mongoose.connection;

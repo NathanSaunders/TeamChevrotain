@@ -61,7 +61,7 @@
       // of the page; i.e., if you one person is on `http://example.com/#view1`
       // and another person is at `http://example.com/#view2` then these two people
       // are considered to be at completely different URLs
-      includeHashInUrl: true,
+      includeHashInUrl: false,
       // When true, the WebRTC-based mic/chat will be disabled
       disableWebRTC: false,
       // When true, youTube videos will synchronize

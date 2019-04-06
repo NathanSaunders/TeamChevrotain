@@ -75,7 +75,7 @@ class DashboardHeader extends React.Component {
             <img src={snapLogo} alt='snap Logo' />
           </div>
           <div className="find-db-docs">
-            <p className='docs' onClick={this.navigateToDocs}>Get Documents</p>
+            <p className='docs' onClick={this.navigateToDocs} className="getDoc">Get Documents</p>
           </div>
           <p className="save-status">{ saveStatusRender() }</p>
           <div onClick={this.callDashboardHandleSave} className="save-button">
@@ -87,6 +87,20 @@ class DashboardHeader extends React.Component {
           </div>  
           </div>     
       </div>
+      // <div className="navbar navbar-inverse navbar-fixed-top">
+      //           <div className="container">              
+      //               <div className="navbar-collapse collapse">
+      //               <div className="logo">
+      //       <img src={snapLogo} alt='snap Logo' />
+      //     </div>
+      //               <ul className="nav navbar-nav navbar-right">
+      //                   <li><a  onClick={this.navigateToDocs} >Get File</a></li>
+      //                   <li><a onClick={this.callDashboardHandleSave} >Save Project</a></li>
+      //                   <li><a onClick={this.logout}>Sign out</a></li>
+      //               </ul>
+      //               </div>
+      //           </div>
+      //           </div>
     );
   }
 };
