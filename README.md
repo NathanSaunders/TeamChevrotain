@@ -34,8 +34,8 @@ Run from the console of the Root and Client directory.
 
 Run from the Root directory.
 
-- Register or Sign In through the browser
-- Start a Collaboration
+- Register or Sign In through the browser.
+- Start a Collaboration using the button located on the Navbar.
 - Copy and Share the link with all necessary parties.
 - Start coding in real time!
 
