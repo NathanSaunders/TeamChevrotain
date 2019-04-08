@@ -1,6 +1,4 @@
-<a
-    <img src="C:\Users\Owner\Desktop\Bootcamp Spot\projects\TeamChevrotain\client\src\assets\snap.png" alt="Snapdox logo" title="Snapdox" align="right" height="60" />
-</a>
+![alt text](https://github.com/jadamsin3d/TeamChevrotain/client/src/assets/snap.png "Logo Title Text 1")
 
 ## Snapdox Alpha 1.0
 
@@ -11,10 +9,10 @@
 Snapdox Alpha is Team Chevrotain's 3rd Project release for the University of Washington's Full Stack Web Development Coding Bootcamp. Designed to enable a real-time collaborative platform for writing code in JavsScript, Snapdox Alpha draws upon various technologies, including:
 
 - MERN Stack
-    -MongoDB
-    -Express
-    -React
-    -Node
+  -MongoDB
+  -Express
+  -React
+  -Node
 - Bootstrap
 - JWT Token
 - JavaScript
@@ -32,12 +30,15 @@ Snapdox Alpha is Team Chevrotain's 3rd Project release for the University of Was
 ## Installation
 
 # `$ npm install --Save`
+
 Run from the console of the Root and Client directory.
 
 # `$ npm start`
+
 Run from the Root directory.
 
 ## Created by TeamChevrotain
+
 - Lidetu Neshnega
 - Jesse Adams
 - Spencer Jack
