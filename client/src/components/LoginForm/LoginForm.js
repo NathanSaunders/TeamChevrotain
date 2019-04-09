@@ -43,13 +43,7 @@ function LoginForm(props) {
                             onChange={props.onChangeEmail}
                             placeholder="Email"
                     />
-                    {/* <input
-									type="text"
-									name="email"
-									value={props.value}
-									onChange={props.onChangeEmail}
-									placeholder="Email"
-								/> */}
+                   
                     </div>
                 </div>
                 <div className="form-group row">
@@ -64,13 +58,7 @@ function LoginForm(props) {
 							onChange={props.onChangePassword}
                             placeholder="Password"
                      />
-                    {/* <input
-									type="password"
-									name="password"
-									value={props.value}
-									onChange={props.onChangePassword}
-									placeholder="Password"
-								/> */}
+                  
                     </div>
                 </div>
                 <div className="form-group row">
@@ -83,9 +71,7 @@ function LoginForm(props) {
   </form>
   </div>
                 </div>
-        {/* <div className="iphone wow fadeInUp" data-wow-delay="1s">
-	        <img src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/renderstart.gif?sfvrsn=3d8cfee1_1"/>
-        </div> */}
+       
       </div>
     </section>
     

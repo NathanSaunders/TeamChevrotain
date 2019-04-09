@@ -87,20 +87,7 @@ class DashboardHeader extends React.Component {
           </div>  
           </div>     
       </div>
-      // <div className="navbar navbar-inverse navbar-fixed-top">
-      //           <div className="container">              
-      //               <div className="navbar-collapse collapse">
-      //               <div className="logo">
-      //       <img src={snapLogo} alt='snap Logo' />
-      //     </div>
-      //               <ul className="nav navbar-nav navbar-right">
-      //                   <li><a  onClick={this.navigateToDocs} >Get File</a></li>
-      //                   <li><a onClick={this.callDashboardHandleSave} >Save Project</a></li>
-      //                   <li><a onClick={this.logout}>Sign out</a></li>
-      //               </ul>
-      //               </div>
-      //           </div>
-      //           </div>
+     
     );
   }
 };

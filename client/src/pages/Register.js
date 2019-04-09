@@ -35,7 +35,8 @@ class Register extends Component {
 			.catch((err) => console.log('failed! ', err))
 			.then(() => {
         console.log('signup successful');
-        this.Registered();
+				this.Registered();
+				window.location.href="/login";
         
 			});
 	};
